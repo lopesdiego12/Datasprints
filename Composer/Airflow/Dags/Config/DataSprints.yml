@@ -85,6 +85,7 @@ etlflow:
       task_id: CleanJson2010
       depends_on_task:
         - CleanFile
+        - CleanJson2009
       command: python /home/airflow/gcs/data/CleanJson_2010.py
       retries: 0
     task_CleanJson2011:
@@ -92,6 +93,8 @@ etlflow:
       task_id: CleanJson2011
       depends_on_task:
         - CleanFile
+        - CleanJson2009
+        - CleanJson2010
       command: python /home/airflow/gcs/data/CleanJson_2011.py
       retries: 0
     task_CleanJson2012:
@@ -99,52 +102,48 @@ etlflow:
       task_id: CleanJson2012
       depends_on_task:
         - CleanFile
+        - CleanJson2009
+        - CleanJson2010
+        - CleanJson2011
       command: python /home/airflow/gcs/data/CleanJson_2012.py
       retries: 0
-    task_Json2Jsonl2009:
+    task_json2csv_2009:
       tasktype: BashOperator
-      task_id: Json2Jsonl2009
+      task_id: json2csv_2009
       depends_on_task:
         - CleanJson2009
-      command: python /home/airflow/gcs/data/Json2Jsonl_2009.py
+      command: python3 /home/airflow/gcs/data/json2csv.py /home/airflow/gcs/data/2009.json /home/airflow/gcs/data/2009.csv
       retries: 0
-    task_Json2Jsonl2010:
+    task_json2csv_2010:
       tasktype: BashOperator
-      task_id: Json2Jsonl2010
+      task_id: json2csv_2010
       depends_on_task:
-        - Json2Jsonl2009
         - CleanJson2010
-      command: python /home/airflow/gcs/data/Json2Jsonl_2010.py
+      command: python3 /home/airflow/gcs/data/json2csv.py /home/airflow/gcs/data/2010.json /home/airflow/gcs/data/2010.csv
       retries: 0
-    task_Json2Jsonl2011:
+    task_json2csv_2011:
       tasktype: BashOperator
-      task_id: Json2Jsonl2011
+      task_id: json2csv_2011
       depends_on_task:
-        - Json2Jsonl2010
         - CleanJson2011
-      command: python /home/airflow/gcs/data/Json2Jsonl_2011.py
+      command: python3 /home/airflow/gcs/data/json2csv.py /home/airflow/gcs/data/2011.json /home/airflow/gcs/data/2011.csv
       retries: 0
-    task_Json2Jsonl2012:
+    task_json2csv_2012:
       tasktype: BashOperator
-      task_id: Json2Jsonl2012
+      task_id: json2csv_2012
       depends_on_task:
-        - Json2Jsonl2011
         - CleanJson2012
-      command: python /home/airflow/gcs/data/Json2Jsonl_2012.py
-      retries: 0
-    task_CommaJson_2012:
-      tasktype: BashOperator
-      task_id: CommaJson_2012
-      depends_on_task:
-        - Json2Jsonl2012
-      command: python /home/airflow/gcs/data/CommaJson_2012.py
+      command: python3 /home/airflow/gcs/data/json2csv.py /home/airflow/gcs/data/2012.json /home/airflow/gcs/data/2012.csv
       retries: 0
     task_LoadData_Google: 
       tasktype: DummyOperator
       task_id: LoadData_Google
       depends_on_task:
         - CleanPayment
-        - CommaJson_2012
+        - json2csv_2009
+        - json2csv_2010
+        - json2csv_2011
+        - json2csv_2012
       retries: 0
     task_LoadPaymentCSV:
       tasktype: BashOperator
@@ -165,26 +164,26 @@ etlflow:
       task_id: Load2009Json
       depends_on_task:
         - LoadData_Google
-      command: gsutil cp /home/airflow/gcs/data/2009_jsonl.json gs://bucket_datasprints  
+      command: gsutil cp /home/airflow/gcs/data/2009.csv gs://bucket_datasprints  
       retries: 0
     task_Load2010Json:
       tasktype: BashOperator
       task_id: Load2010Json
       depends_on_task:
         - LoadData_Google
-      command: gsutil cp /home/airflow/gcs/data/2010_jsonl.json gs://bucket_datasprints 
+      command: gsutil cp /home/airflow/gcs/data/2010.json gs://bucket_datasprints 
       retries: 0
     task_Load2011Json:
       tasktype: BashOperator
       task_id: Load2011Json
       depends_on_task:
         - LoadData_Google
-      command: gsutil cp /home/airflow/gcs/data/2011_jsonl.json gs://bucket_datasprints 
+      command: gsutil cp /home/airflow/gcs/data/2011.json gs://bucket_datasprints 
       retries: 0
     task_Load2012Json:
       tasktype: BashOperator
       task_id: Load2012Json
       depends_on_task:
         - LoadData_Google
-      command: gsutil cp /home/airflow/gcs/data/data_2012.json gs://bucket_datasprints  
+      command: gsutil cp /home/airflow/gcs/data/2012.json gs://bucket_datasprints  
       retries: 0
