@@ -4,7 +4,7 @@
 ## Arquitetura
 
 * [Desenho da arquitetura utilizada](https://github.com/lopesdiego12/Datasprints/blob/master/Architecture/DataSprints%20Architecture.pdf)
-![image](https://raw.githubusercontent.com/lopesdiego12/Datasprints/DataSprints Architecture.png
+![image](https://raw.githubusercontent.com/lopesdiego12/Datasprints/DataSprints%20Architecture.png)
 ---
 
 ## Conceitos utilizados
