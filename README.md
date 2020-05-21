@@ -27,10 +27,12 @@ Google Storage, Gsutil, Google big query, VPC, bucket, load balancer
 
 
 >SQL
+
 Criação da tabela, consultas iniciais, importação dos dados para Tableau
 
 
 >Data Engineer
+
 Processos automatizados para extração, transformação e processamento dos dados. Utilizando a dag do airflow abaixo na cloud do Google. Serviço Google composer.
 
 * [Exemplos](https://raw.githubusercontent.com/lopesdiego12/Datasprints/master/Architecture/Captura%20de%20Tela%202020-05-20%20a%CC%80s%204.59.47%20PM.png)
