@@ -4,10 +4,10 @@
 ## Arquitetura
 
 * [Desenho da arquitetura utilizada](https://github.com/lopesdiego12/Datasprints/blob/master/Architecture/DataSprints%20Architecture.pdf)
-
+![image](https://raw.githubusercontent.com/lopesdiego12/Datasprints/DataSprints Architecture.png
 ---
 
-## Conceitos utilizados 
+## Conceitos utilizados
 
 >Linux
 Comandos (Sed, curl, cp, git)
